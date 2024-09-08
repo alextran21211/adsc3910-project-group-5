@@ -38,5 +38,5 @@ By working on this project, all team members agree to adhere to this code of con
 Signed by,
 
 Sayantika Saha
-[Name]
+Huynh Hiep Tran (Alex)
 [Name]
