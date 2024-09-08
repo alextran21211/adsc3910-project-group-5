@@ -20,7 +20,7 @@ We, as members of this group 5, pledge to create an inclusive, respectful, and p
 - Intentionally sabotaging or undermining the efforts of other team members.
 
 ## Conflict Resolution
-If any conflicts arise within the team:
+- If any conflicts arise within the team:
 - Team members should address the issue openly and respectfully.
 - If the conflict persists, it may be escalated to the course instructor or teaching assistant.
 - Everyone involved should be committed to finding a fair and respectful resolution.
@@ -35,4 +35,8 @@ By working on this project, all team members agree to adhere to this code of con
 
 ---
 
-Last Updated: September 7, 2024
+Signed by,
+
+Sayantika Saha
+[Name]
+[Name]
