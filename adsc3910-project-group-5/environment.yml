@@ -1,0 +1,12 @@
+name: adsc3910-project-group-5
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - black
+  - flake8
+  - isort
+  - pip
+  - pip:
+    - python-dotenv
+    - -e .
