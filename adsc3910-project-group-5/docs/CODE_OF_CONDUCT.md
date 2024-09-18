@@ -39,4 +39,6 @@ Signed by,
 
 Sayantika Saha
 Huynh Hiep Tran (Alex)
-[Name]
+Manisha K
+Nwaokenneya Precious
+
