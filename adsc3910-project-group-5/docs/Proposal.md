@@ -41,7 +41,11 @@ Multicollinearity: Some of the emissions variables (coal, oil, gas) might be hig
 Indicate a rough timeline of the project, including the milestones you hope to achieve.
 
 4.2 References
-A list of references with a citation style of your choice.
+
+    -   https://www.kaggle.com/datasets/thedevastator/global-fossil-co2-emissions-by-country-2002-2022
+    -   M. Song, "The researches on relationship between carbon dioxide emission and the influence factors in China," 2017 IEEE 2nd Information Technology, Networking, Electronic and Automation Control Conference (ITNEC), Chengdu, China, 2017, pp. 433-437, doi: 10.1109/ITNEC.2017.8284768. keywords: {Carbon dioxide;Industries;Principal component analysis;Sociology;Energy consumption;Economics;carbon dioxide emission;influence factors;principal component analysis;ordinary least square regression},
+
+    -   
 
 
 
