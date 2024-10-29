@@ -13,12 +13,25 @@ This repository contains all the necessary code, data, models, and documentation
 The primary goal of this project is to analyze global CO2 emissions on a per capita basis. By focusing on emissions normalized to population size, we aim to uncover trends and patterns across countries, regions, and income groups. This will allow us to identify key contributors to emissions, track progress over time, and assess the fairness and effectiveness of climate policies.
 
 ## Setup and Installation
-### 2. Clone the Repository  
+### 1. Clone the Repository  
 First, clone the project to your local machine:  
 
 ```bash
 git clone https://github.com/your-username/adsc_3910_group_5.git
 cd adsc_3910_group_5
+```
 
+### 2. Set up a virtual environment (recommended):
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
 
 
