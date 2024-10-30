@@ -16,6 +16,7 @@ The primary goal of this project is to analyze global CO2 emissions on a per cap
 
 ## Directory Structure
 
+```bash
 ADSC3910-PROJECT-GROUP-5/
 ├── data/
 │   ├── external/        # Data from third-party sources
@@ -42,7 +43,7 @@ ADSC3910-PROJECT-GROUP-5/
 ├── .gitignore           # Files and directories to be ignored by Git
 ├── environment.yml      # Conda environment dependencies
 └── makefile             # Automate tasks like data download, preprocessing, etc.
-
+```
 
 ## Setup and Installation
 ### 1. Clone the Repository  
