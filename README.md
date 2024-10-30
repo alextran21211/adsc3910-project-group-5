@@ -8,7 +8,6 @@ This repository contains all the necessary code, data, models, and documentation
 - [Usage](#usage)
 - [Reports](#reports)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ## Project Overview
