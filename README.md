@@ -54,17 +54,56 @@ git clone https://github.com/your-username/adsc_3910_group_5.git
 cd adsc_3910_group_5
 ```
 
-### 2. Set up a virtual environment (recommended):
+### 2. Set up environment
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
+conda env create -f environment.yml
+conda activate adsc3910-env
 ```
 
-### 3. Install dependencies:
+### 3. Install additional dependencies (if needed)
 
 ```bash
 pip install -r requirements.txt
 ```
 
+### Add your MongoDB credentials
 
+Update the docs/credentials_mongodb.json file with your MongoDB access details.
+
+## Usage
+
+### Preprocess the data
+Run the data_preprocessing.ipynb notebook from the notebooks/ directory to clean and prepare the dataset.
+
+### Explanatory Data Analysis
+Use the data-eda.ipynb notebook in the docs/ directory to visualize patterns and trends.
+
+### Model Training
+Save trained models in the models/ directory. You can extend the makefile to automate the model training process.
+
+### Generate reports and figures
+Store figures in the reports/figures/ directory and use them in the final report.
+
+## Reports
+All figures, analysis outputs, and summaries will be available in the reports/ directory.
+Use makefile commands to generate or automate certain steps:
+
+```bash
+make preprocess
+make report
+```
+
+## Contributing
+Please follow the code of conduct and ensure all contributions align with the agreed teamwork contract. If you wish to contribute:
+
+-  Fork the repository.
+-  Create a feature branch (git checkout -b feature/your-feature-name).
+-  Commit your changes (git commit -m "Add feature").
+-  Push to your branch (git push origin feature/your-feature-name).
+-  Open a Pull Request.
+
+## Acknowledgments
+
+-  Thompson Rivers University (TRU) for course guidance and support
+-  Group members for their collaborative efforts
