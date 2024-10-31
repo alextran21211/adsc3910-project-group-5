@@ -34,6 +34,7 @@ ADSC3910-PROJECT-GROUP-5/
 │   ├── co2_emission_preprocessed.csv # Preprocessed dataset used for analysis
 │   ├── data_analysis.ipynb  # Main analysis notebook
 │   └── data_preprocessing.ipynb # Data cleaning and transformation steps
+├── py_scripts/          # Python scripts for running the project
 ├── references/          # Relevant papers, articles, or external documentation
 │   └── .gitkeep         
 ├── reports/             # Generated reports and figures
@@ -77,6 +78,9 @@ Run the data_preprocessing.ipynb notebook from the notebooks/ directory to clean
 
 ### Explanatory Data Analysis
 Use the data-eda.ipynb notebook in the docs/ directory to visualize patterns and trends.
+
+### EDA with some visualizations
+Run eda.py script in py_script folder from your environment to get some visualizations of the data.
 
 ### Model Training
 Save trained models in the models/ directory. You can extend the makefile to automate the model training process.
