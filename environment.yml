@@ -11,6 +11,11 @@ dependencies:
   - seaborn
   - matplotlib
   - pyspark
+  - mlflow
+  - scikit-learn
+  - pandas
+  - numpy
+  - pyspark
   - pip:
     - python-dotenv
     - -e .
