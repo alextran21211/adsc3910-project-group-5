@@ -84,6 +84,9 @@ Use the data-eda.ipynb notebook in the docs/ directory to visualize patterns and
 
 ### EDA with some visualizations
 Run eda.py script in py_script folder from your environment to get some visualizations of the data.
+When you close the graph, it will automatically open another graph.
+
+`>python ./py_scripts/eda.py`
 
 ### Model Training
 Save trained models in the models/ directory. You can extend the makefile to automate the model training process.
