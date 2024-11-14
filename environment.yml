@@ -8,6 +8,3 @@ dependencies:
   - isort
   - pip
   - pymongo
-  - pip:
-    - python-dotenv
-    - -e .
