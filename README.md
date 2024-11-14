@@ -30,8 +30,7 @@ ADSC3910-PROJECT-GROUP-5/
 │   ├── code of conduct  # Rules for collaboration within the project
 │   ├── credentials_mongodb.json # MongoDB credentials file
 │   ├── data-eda.ipynb   # Exploratory Data Analysis notebook
-│   └── teamwork contract # Agreement for teamwork management
-├── models/              # Trained models and serialized model files
+│   └── teamwork contract # Agreement for teamwork management         
 ├── notebooks/           # Jupyter notebooks for analysis and preprocessing
 │   ├── .gitkeep         
 │   ├── co2_emission_preprocessed.csv # Preprocessed dataset used for analysis
