@@ -44,7 +44,6 @@ ADSC3910-PROJECT-GROUP-5/
 │   └── .gitkeep         
 ├── .gitignore           # Files and directories to be ignored by Git
 ├── environment.yml      # Conda environment dependencies
-└── makefile             # Automate tasks like data download, preprocessing, etc.
 ```
 
 ## Setup and Installation
