@@ -54,20 +54,14 @@ First, clone the project to your local machine:
 
 ```bash
 git clone https://github.com/TRU-PBADS/adsc3910-project-group-5.git
-cd adsc_3910_group_5
+cd adsc3910-project-group-5
 ```
 
 ### 2. Set up environment
 
 ```bash
 conda env create -f environment.yml
-conda activate adsc3910-env
-```
-
-### 3. Install additional dependencies (if needed)
-
-```bash
-pip install -r requirements.txt
+conda activate adsc3910-project-group-5
 ```
 
 ### Add your MongoDB credentials
