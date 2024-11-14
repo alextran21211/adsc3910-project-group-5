@@ -1,61 +1,110 @@
-# adsc_3910_group_5
+# Analyzing CO₂ Emissions: Global Patterns and Insights
+  
 
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
+This repository contains all the necessary code, data, models, and documentation for ADSC 3910 Group 5's Data Science Project. It follows a well-organized structure to ensure reproducibility, collaboration, and efficient development. Below you'll find a comprehensive guide to setting up, using, and contributing to the project.
+## Table of Contents
 
-Analysis of CO2 emissions
+- [Project Overview](#project-overview)
+- [Directory Structure](#directory-structure)
+- [Installation](#installation)
+- [Data Description](#data-description)
+- [Usage](#usage)
+- [Reports](#reports)
+- [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
 
-## Project Organization
+## Project Overview
+The primary goal of this project is to analyze global CO2 emissions on a per capita basis. By focusing on emissions normalized to population size, we aim to uncover trends and patterns across countries, regions, and income groups. This will allow us to identify key contributors to emissions, track progress over time, and assess the fairness and effectiveness of climate policies.
 
-```
-├── LICENSE            <- Open-source license if one is chosen
-├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
-│
-├── docs               <- A default mkdocs project; see www.mkdocs.org for details
-│
-├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
-│
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         adsc_3910_group_5 and configuration for tools like black
-│
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── setup.cfg          <- Configuration file for flake8
-│
-└── adsc_3910_group_5   <- Source code for use in this project.
-    │
-    ├── __init__.py             <- Makes adsc_3910_group_5 a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    └── plots.py                <- Code to create visualizations
+## Directory Structure
+
+```bash
+ADSC3910-PROJECT-GROUP-5/
+├── data/
+│   ├── external/        # Data from third-party sources
+│   ├── interim/         # Intermediate datasets used during data processing
+│   ├── processed/       # Final cleaned data ready for modeling
+│   └── raw/             # Original, unmodified datasets
+├── docs/                # Documentation files (code of conduct, teamwork contract, etc.)
+│   ├── .gitkeep         
+│   ├── code of conduct  # Rules for collaboration within the project
+│   ├── credentials_mongodb.json # MongoDB credentials file
+│   ├── data-eda.ipynb   # Exploratory Data Analysis notebook
+│   └── teamwork contract # Agreement for teamwork management         
+├── notebooks/           # Jupyter notebooks for analysis and preprocessing
+│   ├── .gitkeep         
+│   ├── co2_emission_preprocessed.csv # Preprocessed dataset used for analysis
+│   ├── data_analysis.ipynb  # Main analysis notebook
+│   └── data_preprocessing.ipynb # Data cleaning and transformation steps
+├── py_scripts/          # Python scripts for running the project
+├── references/          # Relevant papers, articles, or external documentation
+│   └── .gitkeep         
+├── reports/             # Generated reports and figures
+│   ├── figures/         # Plots and figures for the final report
+│   └── .gitkeep         
+├── .gitignore           # Files and directories to be ignored by Git
+├── environment.yml      # Conda environment dependencies
 ```
 
---------
+## Setup and Installation
+### 1. Clone the Repository  
+First, clone the project to your local machine:  
 
+```bash
+git clone https://github.com/TRU-PBADS/adsc3910-project-group-5.git
+cd adsc3910-project-group-5
+```
+
+### 2. Set up environment
+
+```bash
+conda env create -f environment.yml
+conda activate adsc3910-project-group-5
+```
+
+### Add your MongoDB credentials
+
+Update the docs/credentials_mongodb.json file with your MongoDB access details.
+
+## Usage
+
+### Preprocess the data
+Run the data_preprocessing.ipynb notebook from the notebooks/ directory to clean and prepare the dataset.
+
+### Explanatory Data Analysis
+Use the data-eda.ipynb notebook in the docs/ directory to visualize patterns and trends.
+
+### EDA with some visualizations
+Run eda.py script in py_script folder from your environment to get some visualizations of the data.
+When you close the graph, it will automatically open another graph.
+
+`>python ./py_scripts/eda.py`
+
+### Model Training
+Save trained models in the models/ directory. You can extend the makefile to automate the model training process.
+
+### Generate reports and figures
+Store figures in the reports/figures/ directory and use them in the final report.
+
+## Reports
+All figures, analysis outputs, and summaries will be available in the reports/ directory.
+Use makefile commands to generate or automate certain steps:
+
+```bash
+make preprocess
+make report
+```
+
+## Contributing
+Please follow the code of conduct and ensure all contributions align with the agreed teamwork contract. If you wish to contribute:
+
+-  Fork the repository.
+-  Create a feature branch (git checkout -b feature/your-feature-name).
+-  Commit your changes (git commit -m "Add feature").
+-  Push to your branch (git push origin feature/your-feature-name).
+-  Open a Pull Request.
+
+## Acknowledgments
+
+-  Thompson Rivers University (TRU) for course guidance and support
+-  Group members for their collaborative efforts
