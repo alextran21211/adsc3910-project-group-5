@@ -14,7 +14,8 @@ This repository contains all the necessary code, data, models, and documentation
 - [Acknowledgments](#acknowledgments)
 
 ## Project Overview
-The primary goal of this project is to analyze global CO2 emissions on a per capita basis. By focusing on emissions normalized to population size, we aim to uncover trends and patterns across countries, regions, and income groups. This will allow us to identify key contributors to emissions, track progress over time, and assess the fairness and effectiveness of climate policies.
+
+The primary goal of this project is to analyze global CO2 emissions, focusing on trends and contributions from different energy sources across countries and regions. By examining historical data from 1750 to 2022, we aim to identify key contributors to emissions, assess the impact of various energy sources—such as coal, oil, gas, and cement—and explore per capita emissions to provide a fair comparison of contributions across nations. This analysis will help uncover patterns, track progress over time, and provide insights to guide effective climate policies.
 
 ## Directory Structure
 
@@ -69,25 +70,35 @@ Update the docs/credentials_mongodb.json file with your MongoDB access details.
 ## Usage
 
 ### Preprocess the data
-Run the data_preprocessing.ipynb notebook from the notebooks/ directory to clean and prepare the dataset.
+Run the data_preprocessing.ipynb notebook from the notebooks/ directory to clean and prepare the dataset. This notebook preprocesses CO₂ emission data by retrieving it from MongoDB, cleaning missing values, and creating a structured dataset. Key features include emissions from various sources, population, and CO2_per_capita. The data is standardized using MinMax scaling and saved as a CSV file (co2_emission_preprocessed.csv) for analysis.
+
 
 ### Explanatory Data Analysis
-Use the data-eda.ipynb notebook in the docs/ directory to visualize patterns and trends.
+Use the data-eda.ipynb notebook in the notebook/ directory to visualize patterns and trends. This generates plots for CO2 emission overtime, top 5 countries emitting CO2, sources of CO2.
 
-### EDA with some visualizations
-Run eda.py script in py_script folder from your environment to get some visualizations of the data.
-When you close the graph, it will automatically open another graph.
 
-`>python ./py_scripts/eda.py`
+### Analysis
+1. Run the *regression_analysis.ipynb* - This notebook performs regression analysis on CO₂ emissions per capita. A linear regression model is built and evaluated using metrics like Mean Squared Error (MSE) and R². Additionally, polynomial regression is applied to capture nonlinear trends, with results compared to the linear model.
 
-### Model Training
-Save trained models in the models/ directory. You can extend the makefile to automate the model training process.
+2. Run *time_series_analysis.ipynb* - This notebook performs time series analysis of CO₂ emissions per capita for the top 10 and bottom 10 countries based on their average emissions. It calculates a 10-year moving average to smooth trends over time and visualizes both raw data and moving averages using line plots. The analysis highlights trends and patterns in emissions for high- and low-emitting countries.
 
-### Generate reports and figures
-Store figures in the reports/figures/ directory and use them in the final report.
+3. Run *CO2_sources_analysis.ipynb* - This notebook conducts a comprehensive analysis of CO₂ emissions, including:
+- Emission Trends by Source: Examining historical trends in CO₂ emissions from coal, oil, gas, and cement.
+- Per Capita Analysis: Calculating and visualizing average CO₂ emissions per capita over time.
+- Correlation Analysis: Using a heatmap to identify relationships between features like emissions and population.
+- Feature Importance: Training a Random Forest model to evaluate the relative contribution of factors like energy sources and population to total CO₂ emissions.
+- Clustering: Applying K-means clustering to group countries based on emissions patterns, visualized through scatter plots.
+- Country Group Comparisons: Comparing CO₂ emissions for income-based country groups to understand disparities.
+
+The insights derived help identify key contributors and trends in global CO₂ emissions.
+
+
 
 ## Reports
 All figures, analysis outputs, and summaries will be available in the reports/ directory.
+
+Plots generated from EDA can be found in /plots directory
+
 Use makefile commands to generate or automate certain steps:
 
 ```bash
