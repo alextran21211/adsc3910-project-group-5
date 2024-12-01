@@ -92,4 +92,5 @@ def main(file_path):
 
 # Run the main function
 if __name__ == "__main__":
-    main('co2_emission_preprocessed.csv')  # Replace with your preprocessed file 
+    # Updated path to the CSV file
+    main('../data/processed/co2_emission_preprocessed.csv')  # Replace with the correct relative path
