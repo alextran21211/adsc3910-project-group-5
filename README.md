@@ -149,16 +149,15 @@ We have tested this script on Databrick Pyspark and then on our local system usi
 
 ### 2. How to run python scripts
 
-**A. EDA Script :**  ```scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\data_eda_using_mongodb_pyspark.ipynb```.
+**A. EDA Script :**  ```scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
 
 To run the eda via terminal, use the following code:
-
 
 ```bash
 >> python "scripts\eda.py" "credentials\guest_credentials_mongodb.json" --collection="embold_train"
 ```
 
-**All the plots that are going to popup during the eda, will also be saved in ```reports\figures\eda\```.**
+**All the plots that are going to popup during the eda, will also be saved in ```reports\figures\```.**
 
 ## Reports
 All figures, analysis outputs, and summaries will be available in the reports/ directory.
