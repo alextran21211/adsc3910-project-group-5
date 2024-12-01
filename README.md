@@ -226,10 +226,54 @@ Note: you need to stay py_scripts folder location to run this
 >> python ./regression_analysis.py
 ```
 
+***Run Regression Analysis Unit Test***  
+To run Regression Analysis unit test, you also need to stay main GitHub reporsitory folder, and then go to tests folder:  
 
+Used this command to go back to main folder of repo:  
 
+```bash
+>> cd ..
+```
+And use this command to go to tests folder:  
 
+```bash
+>> cd tests
+```
 
+To run unit test for data preprocessing, you run this command below:  
+
+```bash
+>> python -m unittest regression_analysis_tests.py
+```
+
+**D. Time Series Analysis Script :**  ```py_scripts\regression_analysis.py``` is all about time series analysis of the project
+
+To run the regression analysis script via terminal, use the following code:  
+Note: you need to stay py_scripts folder location to run this  
+
+```bash
+>> python ./time_series_analysis.py
+```
+
+***Run Time Series Analysis Unit Test***  
+To run Time Series Analysis unit test, you also need to stay main GitHub reporsitory folder, and then go to tests folder:  
+
+Used this command to go back to main folder of repo:  
+
+```bash
+>> cd ..
+```
+And use this command to go to tests folder:  
+
+```bash
+>> cd tests
+```
+
+To run unit test for data preprocessing, you run this command below:  
+
+```bash
+>> python -m unittest time_series_analysis_tests.py
+```
 
 **All the plots that are going to popup during the eda, will also be saved in ```reports\figures\```.**
 
