@@ -68,31 +68,87 @@ conda activate adsc3910-project-group-5
 Update the docs/credentials_mongodb.json file with your MongoDB access details.
 
 ## Usage
+### 1. How to run Notebooks
 
-### Preprocess the data
-Run the data_preprocessing.ipynb notebook from the notebooks/ directory to clean and prepare the dataset. This notebook preprocesses CO₂ emission data by retrieving it from MongoDB, cleaning missing values, and creating a structured dataset. Key features include emissions from various sources, population, and CO2_per_capita. The data is standardized using MinMax scaling and saved as a CSV file (co2_emission_preprocessed.csv) for analysis.
+Browse to the ```notebooks\``` folder, there are in total six notebooks:
 
+**A.** ```notebooks\analysis_co2_sources.ipynb```: The analysis examines CO₂ emission trends, key sources, and per capita metrics. It highlights coal as the top contributor, clusters countries by emission patterns, and reveals income-based disparities, with high-income nations reducing emissions and low-income nations facing clean energy challenges. Insights guide sustainable policies. We'll utilize various MongoDB operators to clean and transform data before it’s analyzed in PySpark. 
 
-### Explanatory Data Analysis
-Use the data-eda.ipynb notebook in the notebook/ directory to visualize patterns and trends. This generates plots for CO2 emission overtime, top 5 countries emitting CO2, sources of CO2.
-
-
-### Analysis
-1. Run the *regression_analysis.ipynb* - This notebook performs regression analysis on CO₂ emissions per capita. A linear regression model is built and evaluated using metrics like Mean Squared Error (MSE) and R². Additionally, polynomial regression is applied to capture nonlinear trends, with results compared to the linear model.
-
-2. Run *time_series_analysis.ipynb* - This notebook performs time series analysis of CO₂ emissions per capita for the top 10 and bottom 10 countries based on their average emissions. It calculates a 10-year moving average to smooth trends over time and visualizes both raw data and moving averages using line plots. The analysis highlights trends and patterns in emissions for high- and low-emitting countries.
-
-3. Run *CO2_sources_analysis.ipynb* - This notebook conducts a comprehensive analysis of CO₂ emissions, including:
-- Emission Trends by Source: Examining historical trends in CO₂ emissions from coal, oil, gas, and cement.
-- Per Capita Analysis: Calculating and visualizing average CO₂ emissions per capita over time.
-- Correlation Analysis: Using a heatmap to identify relationships between features like emissions and population.
-- Feature Importance: Training a Random Forest model to evaluate the relative contribution of factors like energy sources and population to total CO₂ emissions.
-- Clustering: Applying K-means clustering to group countries based on emissions patterns, visualized through scatter plots.
-- Country Group Comparisons: Comparing CO₂ emissions for income-based country groups to understand disparities.
-
-The insights derived help identify key contributors and trends in global CO₂ emissions.
+We have tested this script on Databrick Pyspark and then on our local system using Jupyter notebook.
 
 
+**STEP 1 :** To test the notebook, go to ```notebooks\analysis_co2_sources.ipynb``` using your code editing platforms like **pycharm** or **visual studio code** or **jupyter notebook**
+
+**STEP 2 :** Select the existing environment for kernel selection.
+
+**STEP 3 :** Run each cell to see the what are the functions doing!
+
+---
+
+**B.** ```notebooks\data_preprocessing.ipynb``` : This notebook outlines the preprocessing steps necessary to clean and prepare the text data from our MongoDB collection for further analysis and modeling. We will focus on the 'body' field, addressing various forms of redundant data such as HTML tags, URLs, emojis, stopwords, and punctuations.
+
+**STEP 1 :** To test the notebook, go to ```notebooks\data_preprocessing.ipynb``` using your code editing platforms like **pycharm** or **visual studio code** or **jupyter notebook**
+
+**STEP 2 :** Select the existing environment "group2_env" as kernel selection. As we did for notebook mentioned in *A* point above.
+
+**STEP 3 :** Run each cell to see the what are the functions doing!
+
+---
+
+**C.** ```notebooks\eda.ipynb``` : This notebook demonstrates the meaningful application of MongoDB's query language for data analysis. We'll utilize various MongoDB operators to clean and transform data before it’s analyzed in PySpark. 
+
+We have tested this script on Databrick Pyspark and then on our local system using Jupyter notebook.
+
+
+**STEP 1 :** To test the notebook, go to ```notebooks\eda.ipynb``` using your code editing platforms like **pycharm** or **visual studio code** or **jupyter notebook**
+
+**STEP 2 :** Select the existing environment for kernel selection.
+
+**STEP 3 :** Run each cell to see the what are the functions doing!
+
+---
+
+**D.** ```notebooks\mlflow_models.ipynb``` : This notebook compares the model's performance to get insight into the best-performing model.
+
+**STEP 1 :** To test the notebook, go to ```notebooks\mlflow_models.ipynb``` using your code editing platforms like **pycharm** or **visual studio code** or **jupyter notebook**
+
+**STEP 2 :** Select the existing environment as kernel selection.
+
+**STEP 3 :** Run each cell to see the what are the functions doing!
+
+---
+
+**E.** ```notebooks\regression_analysis.ipynb``` : This notebook performs regression analysis on CO₂ emissions per capita. A linear regression model is built and evaluated using metrics like Mean Squared Error (MSE) and R². Additionally, polynomial regression is applied to capture nonlinear trends, with results compared to the linear model.
+
+**STEP 1 :** To test the notebook, go to ```notebooks\regression_analysis.ipynb``` using your code editing platforms like **pycharm** or **visual studio code** or **jupyter notebook**
+
+**STEP 2 :** Select the existing environment as kernel selection.
+
+**STEP 3 :** Run each cell to see the what are the functions doing!
+
+--- 
+
+**F.** ```notebooks\time_series_analysis.ipynb``` : This notebook performs time series analysis of CO₂ emissions per capita for the top 10 and bottom 10 countries based on their average emissions. It calculates a 10-year moving average to smooth trends over time and visualizes both raw data and moving averages using line plots. The analysis highlights trends and patterns in emissions for high- and low-emitting countries.
+
+**STEP 1 :** To test the notebook, go to ```notebooks\time_series_analysis.ipynb``` using your code editing platforms like **pycharm** or **visual studio code** or **jupyter notebook**
+
+**STEP 2 :** Select the existing environment as kernel selection.
+
+**STEP 3 :** Run each cell to see the what are the functions doing!
+---
+
+### 2. How to run python scripts
+
+**A. EDA Script :**  ```scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\data_eda_using_mongodb_pyspark.ipynb```.
+
+To run the eda via terminal, use the following code:
+
+
+```bash
+>> python "scripts\eda.py" "credentials\guest_credentials_mongodb.json" --collection="embold_train"
+```
+
+**All the plots that are going to popup during the eda, will also be saved in ```reports\figures\eda\```.**
 
 ## Reports
 All figures, analysis outputs, and summaries will be available in the reports/ directory.
