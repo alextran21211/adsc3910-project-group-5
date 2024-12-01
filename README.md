@@ -168,6 +168,26 @@ After that run this command to run data preprocessing py script:
 >> python ./data_preprocessing.py
 ```
 
+***Run Data Preprocessing Unit Test***
+To run data preprocessing unit test, you need to go back to main GitHub reporsitory folder, and then go to tests folder:  
+
+Used this command to go back to main folder of repo:  
+
+```bash
+>> cd ..
+```
+And use this command to go to tests folder:  
+
+```bash
+>> cd tests
+```
+
+To run unit test for data preprocessing, you run this command below:  
+
+```bash
+>> python -m unittest data_preprocessing_tests.py
+```
+
 **B. EDA Script :**  ```py_scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
 
 To run the eda via terminal, use the following code:
