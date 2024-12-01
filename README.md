@@ -154,6 +154,14 @@ We have tested this script on Databrick Pyspark and then on our local system usi
 
 ### 2. How to run python scripts
 
+**A. Data Preprocessing Script :**  ```py_scripts\data_preprocessing.py``` is all about data preprocessing step, it is very important for next steps in data analysis
+
+To run this script, first open the terminal and navigate to the location of the GitHub repository folder you just cloned, then type:
+
+```bash
+>> python ./data_preprocessing.py
+```
+
 **A. EDA Script :**  ```py_scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
 
 To run the eda via terminal, use the following code:
