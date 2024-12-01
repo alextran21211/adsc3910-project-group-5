@@ -156,7 +156,7 @@ We have tested this script on Databrick Pyspark and then on our local system usi
 
 **A. Data Preprocessing Script :**  ```py_scripts\data_preprocessing.py``` is all about data preprocessing step, it is very important for next steps in data analysis
 
-To run this script, first open the terminal and navigate to the location of the GitHub repository folder you just cloned, then type:
+To run this script, first open the terminal and navigate to the location of the GitHub repository folder you just cloned, then type this command go py_scripts folder:
 
 ```bash
 >> cd py_scripts
@@ -171,9 +171,10 @@ After that run this command to run data preprocessing py script:
 **B. EDA Script :**  ```py_scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
 
 To run the eda via terminal, use the following code:
+Note: you need to stay py_scripts folder location to run this
 
 ```bash
->> python "scripts\eda.py" "credentials\guest_credentials_mongodb.json" --collection="embold_train"
+>> python ./eda.py
 ```
 
 **All the plots that are going to popup during the eda, will also be saved in ```reports\figures\```.**
