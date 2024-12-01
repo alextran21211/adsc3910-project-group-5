@@ -31,13 +31,23 @@ ADSC3910-PROJECT-GROUP-5/
 │   ├── code of conduct  # Rules for collaboration within the project
 │   ├── credentials_mongodb.json # MongoDB credentials file
 │   ├── data-eda.ipynb   # Exploratory Data Analysis notebook
+│   ├── project_proposal.pdf #the final project proposal
 │   └── teamwork contract # Agreement for teamwork management         
 ├── notebooks/           # Jupyter notebooks for analysis and preprocessing
 │   ├── .gitkeep         
-│   ├── co2_emission_preprocessed.csv # Preprocessed dataset used for analysis
-│   ├── data_analysis.ipynb  # Main analysis notebook
-│   └── data_preprocessing.ipynb # Data cleaning and transformation steps
+│   ├── analysis_co2_sources.ipynb  
+|   ├── data_preprocessing.ipynb
+|   ├── eda.ipynb
+|   ├── mlflow_models.ipynb
+|   ├── regression_analysis.ipynb
+│   └── time_series_analysis.ipynb
+├── plots/               # plots to understand the emissions through visualization
 ├── py_scripts/          # Python scripts for running the project
+│   ├── _init_.py
+│   ├── data_preprocessing.py
+│   ├── eda.py
+│   ├── regression_analysis.py
+│   └── time_series_analysis.py
 ├── references/          # Relevant papers, articles, or external documentation
 │   └── .gitkeep         
 ├── reports/             # Generated reports and figures
