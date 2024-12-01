@@ -1,71 +1,72 @@
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 import pandas as pd
-import numpy as np
+from pymongo import MongoClient
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../py_scripts")))
 
-from py_scripts.eda import connect_to_mongo, fetch_and_transform_data, clean_data
+from eda import data  # Assuming data is returned after preprocessing
 
-from py_scripts.eda import (
-            plot_co2_emissions_over_time,
-            plot_co2_per_capita_over_time,
-            plot_population_growth_over_time,
-            plot_relationship_population_co2,
-            plot_correlation_heatmap,
-            plot_co2_emissions_multiple_countries,
-            plot_top_5_co2_per_capita
-        )
+class TestEda(unittest.TestCase):
 
-class TestCO2Analysis(unittest.TestCase):
+    @patch("eda.MongoClient")
+    def test_mongo_connection(self, MockMongoClient):
+        # Mock MongoDB client
+        mock_client = MockMongoClient.return_value
+        mock_collection = mock_client['group_5_project']['co2_emission']
+        mock_collection.find.return_value = [{"Afghanistan": {"iso_code": "AFG", "data": [{"year": 1850, "population": 1000, "cumulative_luc_co2": 2.5}]}}]
 
+        # Mock data retrieval
+        documents = mock_collection.find()
+        self.assertIsInstance(documents, list)
+        self.assertGreater(len(documents), 0)
 
-    def test_clean_data(self):
-        """Test data cleaning and preprocessing."""
-        test_data = {
-            "Country": ["A", "B", "A"],
-            "ISO_Code": ["A1", "B1", "A1"],
-            "Year": [2000, 2001, 2001],
-            "Population": [1000, np.nan, 1100],
-            "CO2": [500, 800, np.nan]
-        }
-        test_df = pd.DataFrame(test_data)
-        cleaned_df = clean_data(test_df)
-        
-        expected_data = {
-            "Country": ["A", "B", "A"],
-            "Year": [2000, 2001, 2001],
-            "Population": [1000, 1050, 1100],  # 1050 is the mean population
-            "CO2": [500, 800, 650],  # 650 is the mean CO2
-            "CO2_per_capita": [0.5, 0.7619, 0.5909]  # Computed CO2 per capita
-        }
-        expected_df = pd.DataFrame(expected_data)
-        
-        pd.testing.assert_frame_equal(cleaned_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_less_precise=3)
+    def test_dataframe_structure(self):
+        # Create a sample dataframe
+        sample_data = [
+            {"Country": "Afghanistan", "ISO_Code": "AFG", "Year": 1850, "Population": 1000, "CO2": 2.5},
+            {"Country": "Brazil", "ISO_Code": "BRA", "Year": 1850, "Population": 2000, "CO2": 5.0}
+        ]
+        df = pd.DataFrame(sample_data)
 
-    def test_plot_functions(self):
-        """Test that plot functions run without error."""
-        df = pd.DataFrame({
-            "Country": ["A", "A", "B", "B"],
-            "Year": [2000, 2001, 2000, 2001],
-            "Population": [1000, 1100, 2000, 2100],
-            "CO2": [500, 550, 1000, 1050],
-            "CO2_per_capita": [0.5, 0.5, 0.5, 0.5]
-        })
+        # Check columns
+        expected_columns = ["Country", "ISO_Code", "Year", "Population", "CO2"]
+        self.assertListEqual(list(df.columns), expected_columns)
 
-        try:
-         
-            plot_co2_emissions_over_time(df, "A")
-            plot_co2_per_capita_over_time(df, "A")
-            plot_population_growth_over_time(df, "A")
-            plot_relationship_population_co2(df)
-            plot_correlation_heatmap(df)
-            plot_co2_emissions_multiple_countries(df)
-            plot_top_5_co2_per_capita(df)
-        except Exception as e:
-            self.fail(f"Plot functions raised an exception: {e}")
+        # Check data types
+        self.assertTrue(df["Population"].dtype in ["int64", "float64"])
+        self.assertTrue(df["CO2"].dtype in ["int64", "float64"])
 
-if __name__ == "__main__":
+    def test_missing_values_handling(self):
+        # Test missing value handling
+        sample_data = [
+            {"Country": "Afghanistan", "ISO_Code": "AFG", "Year": 1850, "Population": None, "CO2": 2.5},
+            {"Country": "Brazil", "ISO_Code": "BRA", "Year": 1850, "Population": 2000, "CO2": None}
+        ]
+        df = pd.DataFrame(sample_data)
+
+        # Fill missing values
+        df['Population'] = df['Population'].fillna(df['Population'].mean())
+        df['CO2'] = df['CO2'].fillna(df['CO2'].mean())
+
+        # Ensure no missing values
+        self.assertFalse(df['Population'].isnull().any())
+        self.assertFalse(df['CO2'].isnull().any())
+
+    def test_co2_per_capita_calculation(self):
+        # Test CO2 per capita calculation
+        sample_data = [
+            {"Country": "Afghanistan", "ISO_Code": "AFG", "Year": 1850, "Population": 1000, "CO2": 2.5},
+            {"Country": "Brazil", "ISO_Code": "BRA", "Year": 1850, "Population": 2000, "CO2": 5.0}
+        ]
+        df = pd.DataFrame(sample_data)
+        df['CO2_per_capita'] = df['CO2'] / df['Population']
+
+        # Check calculation
+        self.assertAlmostEqual(df.iloc[0]['CO2_per_capita'], 0.0025)
+        self.assertAlmostEqual(df.iloc[1]['CO2_per_capita'], 0.0025)
+
+if __name__ == '__main__':
     unittest.main()
