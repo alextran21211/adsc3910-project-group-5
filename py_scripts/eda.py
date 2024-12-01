@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient  # import mongo client to connect
 import pandas as pd
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, count, isnan, mean, stddev, min, max, desc
@@ -12,126 +12,145 @@ import seaborn as sns
 sns.set(style="whitegrid")
 plt.rcParams["font.family"] = "DejaVu Sans"
 
-def connect_to_mongo(username, password, host, db_name, collection_name):
-    """Connect to MongoDB and return the specified collection."""
-    password = urllib.parse.quote(password)
-    url = f"mongodb+srv://{username}:{password}@{host}/?retryWrites=true&w=majority"
-    client = MongoClient(url)
-    db = client[db_name]
-    return db[collection_name]
+username = "alextran21211"
+password = urllib.parse.quote("database12345")
+host = "cluster0.zsych.mongodb.net"
+url = f"mongodb+srv://{username}:{password}@{host}/?retryWrites=true&w=majority"
 
-def fetch_and_transform_data(collection):
-    """Fetch data from MongoDB collection and transform it into a pandas DataFrame."""
-    documents = collection.find()
-    data = []
-    for doc in documents:
-        for country, country_data in doc.items():
-            if country == "_id":
-                continue
-            iso_code = country_data.get('iso_code')
-            for entry in country_data.get('data', []):
-                year = entry.get('year')
-                population = entry.get('population')
-                co2 = entry.get('cumulative_luc_co2')
-                data.append({
-                    'Country': country,
-                    'ISO_Code': iso_code,
-                    'Year': year,
-                    'Population': population,
-                    'CO2': co2
-                })
-    return pd.DataFrame(data)
+client = MongoClient(url)
 
-def clean_data(df):
-    """Clean and preprocess the data."""
-    df['Population'] = df['Population'].fillna(df['Population'].mean())
-    df['CO2'] = df['CO2'].fillna(df['CO2'].mean())
-    df['CO2_per_capita'] = df['CO2'] / df['Population']
-    df.drop_duplicates(inplace=True)
-    df = df.drop(columns=['ISO_Code'])
-    return df
+db = client['group_5_project']
+collection = db["co2_emission"]
 
-def plot_co2_emissions_over_time(df, country):
-    """Plot CO₂ emissions over time for a specific country."""
-    plt.figure(figsize=(12, 6))
-    sns.lineplot(data=df[df['Country'] == country], x='Year', y='CO2', color="b")
-    plt.title(f"CO₂ Emissions Over Time for {country}")
-    plt.xlabel("Year")
-    plt.ylabel("Total CO₂ Emissions")
-    plt.show()
+documents = collection.find()
 
-def plot_co2_per_capita_over_time(df, country):
-    """Plot CO₂ emissions per capita over time for a specific country."""
-    plt.figure(figsize=(12, 6))
-    sns.lineplot(data=df[df['Country'] == country], x='Year', y='CO2_per_capita', color="g")
-    plt.title(f"CO₂ Emissions Per Capita Over Time for {country}")
-    plt.xlabel("Year")
-    plt.ylabel("CO₂ Emissions Per Capita")
-    plt.show()
+data = []
 
-def plot_population_growth_over_time(df, country):
-    """Plot population growth over time for a specific country."""
-    plt.figure(figsize=(12, 6))
-    sns.lineplot(data=df[df['Country'] == country], x='Year', y='Population', color="purple")
-    plt.title(f"Population Growth Over Time for {country}")
-    plt.xlabel("Year")
-    plt.ylabel("Population")
-    plt.show()
+for doc in documents:
+    for country, country_data in doc.items():
+        if country == "_id":
+            continue  
+        iso_code = country_data.get('iso_code')
+        for entry in country_data.get('data', []):
+            year = entry.get('year')
+            population = entry.get('population')
+            co2 = entry.get('cumulative_luc_co2')
+           
+            data.append({
+                'Country': country,
+                'ISO_Code': iso_code,
+                'Year': year,
+                'Population': population,
+                'CO2': co2
+            })
 
-def plot_relationship_population_co2(df):
-    """Plot relationship between population and CO₂ emissions."""
-    plt.figure(figsize=(10, 6))
-    sns.scatterplot(data=df, x='Population', y='CO2', hue='Country', palette="coolwarm", legend=None)
-    plt.title("Relationship Between Population and CO₂ Emissions")
-    plt.xlabel("Population")
-    plt.ylabel("Total CO₂ Emissions")
-    plt.show()
+df = pd.DataFrame(data)
 
-def plot_correlation_heatmap(df):
-    """Plot correlation heatmap."""
-    plt.figure(figsize=(8, 6))
-    correlation_matrix = df[['Population', 'CO2', 'CO2_per_capita']].corr()
-    sns.heatmap(correlation_matrix, annot=True, cmap="YlGnBu", fmt=".2f")
-    plt.title("Correlation Matrix")
-    plt.show()
+# Data Cleaning and Transformation
+print(df.isnull().sum()) 
+df['Population'] = df['Population'].fillna(df['Population'].mean()) 
+df['CO2'] = df['CO2'].fillna(df['CO2'].mean())  
+df['CO2_per_capita'] = df['CO2'] / df['Population']
+df.drop_duplicates(inplace=True)
+df = df.drop(columns=['ISO_Code'])
+print(df.head())
 
-def plot_co2_emissions_multiple_countries(df):
-    """Plot CO₂ emissions over time for multiple countries."""
-    plt.figure(figsize=(14, 8))
-    sns.lineplot(data=df, x='Year', y='CO2', hue='Country', legend='full', palette='tab10')
-    plt.title("CO₂ Emissions Over Time for Each Country")
-    plt.xlabel("Year")
-    plt.ylabel("Total CO₂ Emissions")
-    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.show()
+# 1. CO₂ Emissions Over Time
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=df[df['Country'] == "Afghanistan"], x='Year', y='CO2', color="b")
+plt.title("CO₂ Emissions Over Time for Afghanistan")
+plt.xlabel("Year")
+plt.ylabel("Total CO₂ Emissions")
+plt.show()
+plt.close()
 
-def plot_top_5_co2_per_capita(df):
-    """Plot CO₂ emissions per capita over time for the top 5 emitting countries."""
-    non_countries = ["World", "High-income countries", "Low-income countries", "Upper-middle-income countries", 
-                     "Lower-middle-income countries", "Africa", "Europe", "Asia", "Oceania", "Americas", "North America",
-                     "South America", "Asia (excl. China and India)", "Europe (excl. EU-27)", "Europe (excl. EU-28)", "North America (excl. USA)"]
-    df_filtered = df[~df['Country'].isin(non_countries)]
-    top_countries = df_filtered.groupby('Country')['CO2'].mean().nlargest(5).index
-    plt.figure(figsize=(14, 8))
-    sns.lineplot(data=df_filtered[df_filtered['Country'].isin(top_countries)], x='Year', y='CO2_per_capita', hue='Country', palette='Dark2')
-    plt.title("CO₂ Emissions Per Capita Over Time for Top 5 CO₂ Emitting Countries")
-    plt.xlabel("Year")
-    plt.ylabel("CO₂ Emissions Per Capita")
-    plt.legend(title="Country", bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.show()
+# 2. CO₂ Emissions Per Capita Over Time
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=df[df['Country'] == "Afghanistan"], x='Year', y='CO2_per_capita', color="g")
+plt.title("CO₂ Emissions Per Capita Over Time for Afghanistan")
+plt.xlabel("Year")
+plt.ylabel("CO₂ Emissions Per Capita")
+plt.show()
+plt.close()
 
-# Main entry point
-def main():
-    # MongoDB credentials
-    username = "alextran21211"
-    password = "database12345"
-    host = "cluster0.zsych.mongodb.net"
-    db_name = "group_5_project"
-    collection_name = "co2_emission"
+# 3. Population Growth Over Time
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=df[df['Country'] == "Afghanistan"], x='Year', y='Population', color="purple")
+plt.title("Population Growth Over Time for Afghanistan")
+plt.xlabel("Year")
+plt.ylabel("Population")
+plt.show()
+plt.close()
 
-    # Connect to MongoDB and fetch data
-    collection = connect_to_mongo(username, password, host, db_name, collection_name)
-    df = fetch_and_transform_data(collection)
+# 4. Relationship CO₂ Emissions vs. Population (Scatter Plot)
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df, x='Population', y='CO2', hue='Country', palette="coolwarm", legend=None)
+plt.title("Relationship Between Population and CO₂ Emissions")
+plt.xlabel("Population")
+plt.ylabel("Total CO₂ Emissions")
+plt.show()
+plt.close()
 
-    # Clean and preprocess data
- 
+# 5. Correlation Heatmap
+plt.figure(figsize=(8, 6))
+correlation_matrix = df[['Population', 'CO2', 'CO2_per_capita']].corr()
+sns.heatmap(correlation_matrix, annot=True, cmap="YlGnBu", fmt=".2f")
+plt.title("Correlation Matrix")
+plt.show()
+plt.close()
+
+# 6. CO₂ Emissions Over Time for Different Countries
+plt.figure(figsize=(14, 8))
+sns.lineplot(data=df, x='Year', y='CO2', hue='Country', legend='full', palette='tab10')
+plt.title("CO₂ Emissions Over Time for Each Country")
+plt.xlabel("Year")
+plt.ylabel("Total CO₂ Emissions")
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.show()
+plt.close()
+
+# 7. Top 5 CO₂ Emissions Per Capita Over Time
+non_countries = ["World", "High-income countries", "Low-income countries", "Upper-middle-income countries", 
+                 "Lower-middle-income countries", "Africa", "Europe", "Asia", "Oceania", "Americas", "North America",
+                 "South America", "Asia (excl. China and India)", "Europe (excl. EU-27)", "Europe (excl. EU-28)", "North America (excl. USA)" ]
+df_filtered = df[~df['Country'].isin(non_countries)]
+top_countries = df_filtered.groupby('Country')['CO2'].mean().nlargest(5).index
+
+plt.figure(figsize=(14, 8))
+sns.lineplot(data=df_filtered[df_filtered['Country'].isin(top_countries)], x='Year', y='CO2_per_capita', hue='Country', palette='Dark2')
+plt.title("CO₂ Emissions Per Capita Over Time for Top 5 CO₂ Emitting Countries")
+plt.xlabel("Year")
+plt.ylabel("CO₂ Emissions Per Capita")
+plt.legend(title="Country", bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.show()
+plt.close()
+
+# 8. Heatmap of CO₂ Emissions Over Time for Selected Countries
+selected_countries = ["Afghanistan", "Brazil", "China", "India", "United States"]
+df_selected = df[df['Country'].isin(selected_countries)]
+heatmap_data = df_selected.pivot_table(index='Country', columns='Year', values='CO2', aggfunc='mean').fillna(0)
+
+plt.figure(figsize=(14, 8))
+sns.heatmap(heatmap_data, cmap='YlGnBu', cbar_kws={'label': 'CO₂ Emissions'}, fmt=".1f")
+plt.title("CO₂ Emissions Over Time for Selected Countries")
+plt.xlabel("Year")
+plt.ylabel("Country")
+plt.show()
+plt.close()
+
+# 9. Boxplot of CO₂ Emissions Per Capita by Country for Selected Countries
+plt.figure(figsize=(12, 8))
+sns.boxplot(data=df_selected, x='Country', y='CO2_per_capita', palette="Set3")
+plt.title("Distribution of CO₂ Emissions Per Capita by Country")
+plt.xlabel("Country")
+plt.ylabel("CO₂ Emissions Per Capita")
+plt.show()
+plt.close()
+
+# 10. Facet Grid of CO₂ Emissions Over Time for Selected Countries
+g = sns.FacetGrid(df_selected, col="Country", col_wrap=3, height=4, aspect=1.5)
+g.map(sns.lineplot, "Year", "CO2", color="b")
+g.set_titles("{col_name}")
+g.set_axis_labels("Year", "Total CO₂ Emissions")
+g.fig.suptitle("CO₂ Emissions Over Time by Country", y=1.05)
+plt.show()
