@@ -149,7 +149,7 @@ We have tested this script on Databrick Pyspark and then on our local system usi
 
 ### 2. How to run python scripts
 
-**A. EDA Script :**  ```scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
+**A. EDA Script :**  ```py_scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
 
 To run the eda via terminal, use the following code:
 
