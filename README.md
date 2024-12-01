@@ -152,7 +152,7 @@ We have tested this script on Databrick Pyspark and then on our local system usi
 **STEP 3 :** Run each cell to see the what are the functions doing!
 ---
 
-### 2. How to run python scripts
+### 2. How to run python scripts and unit test
 
 **A. Data Preprocessing Script :**  ```py_scripts\data_preprocessing.py``` is all about data preprocessing step, it is very important for next steps in data analysis
 
@@ -171,7 +171,7 @@ After that run this command to run data preprocessing py script:
 **B. EDA Script :**  ```py_scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
 
 To run the eda via terminal, use the following code:
-Note: you need to stay py_scripts folder location to run this
+Note: you need to stay py_scripts folder location to run this  
 
 ```bash
 >> python ./eda.py
