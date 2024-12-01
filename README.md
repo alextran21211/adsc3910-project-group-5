@@ -54,9 +54,10 @@ ADSC3910-PROJECT-GROUP-5/
 │   ├── figures/         # Plots and figures for the final report
 │   └── .gitkeep
 ├── tests/
-│   ├── test_eda2.py
-│   ├── test_regression.py
-│   └── test_time_series.py
+│   ├── data_preprocessing_tests.py
+│   ├── eda_tests.py
+│   ├── regression_analysis_tests.py
+│   └── time_series_analysis_tests.py
 ├── .gitignore           # Files and directories to be ignored by Git
 ├── environment.yml      # Conda environment dependencies
 ```
