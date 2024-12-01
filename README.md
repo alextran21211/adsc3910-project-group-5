@@ -217,6 +217,19 @@ To run unit test for data preprocessing, you run this command below:
 >> python -m unittest data_preprocessing_tests.py
 ```
 
+**C. Regression Analysis Script :**  ```py_scripts\regression_analysis.py``` is all about regression analysis of the project
+
+To run the regression analysis script via terminal, use the following code:
+Note: you need to stay py_scripts folder location to run this  
+
+```bash
+>> python ./regression_analysis.py
+```
+
+
+
+
+
 
 **All the plots that are going to popup during the eda, will also be saved in ```reports\figures\```.**
 
