@@ -152,11 +152,11 @@ We have tested this script on Databrick Pyspark and then on our local system usi
 **STEP 3 :** Run each cell to see the what are the functions doing!
 ---
 
-### 2. How to run python scripts
+### 2. How to run python scripts and unit test
 
 **A. Data Preprocessing Script :**  ```py_scripts\data_preprocessing.py``` is all about data preprocessing step, it is very important for next steps in data analysis
 
-To run this script, first open the terminal and navigate to the location of the GitHub repository folder you just cloned, then type:
+To run this script, first open the terminal and navigate to the location of the GitHub repository folder you just cloned, then type this command go py_scripts folder:
 
 ```bash
 >> cd py_scripts
@@ -168,13 +168,68 @@ After that run this command to run data preprocessing py script:
 >> python ./data_preprocessing.py
 ```
 
+***Run Data Preprocessing Unit Test***  
+To run data preprocessing unit test, you need to go back to main GitHub reporsitory folder, and then go to tests folder:  
+
+Used this command to go back to main folder of repo:  
+
+```bash
+>> cd ..
+```
+And use this command to go to tests folder:  
+
+```bash
+>> cd tests
+```
+
+To run unit test for data preprocessing, you run this command below:  
+
+```bash
+>> python -m unittest data_preprocessing_tests.py
+```
+
 **B. EDA Script :**  ```py_scripts\eda.py``` is all about data analysis that was done in the notebook ```notebooks\eda.ipynb```.
 
 To run the eda via terminal, use the following code:
+Note: you need to stay py_scripts folder location to run this  
 
 ```bash
->> python "scripts\eda.py" "credentials\guest_credentials_mongodb.json" --collection="embold_train"
+>> python ./eda.py
 ```
+
+***Run EDA Unit Test***  
+To run EDA unit test, you also need to stay main GitHub reporsitory folder, and then go to tests folder:  
+
+Used this command to go back to main folder of repo:  
+
+```bash
+>> cd ..
+```
+And use this command to go to tests folder:  
+
+```bash
+>> cd tests
+```
+
+To run unit test for data preprocessing, you run this command below:  
+
+```bash
+>> python -m unittest data_preprocessing_tests.py
+```
+
+**C. Regression Analysis Script :**  ```py_scripts\regression_analysis.py``` is all about regression analysis of the project
+
+To run the regression analysis script via terminal, use the following code:
+Note: you need to stay py_scripts folder location to run this  
+
+```bash
+>> python ./regression_analysis.py
+```
+
+
+
+
+
 
 **All the plots that are going to popup during the eda, will also be saved in ```reports\figures\```.**
 
